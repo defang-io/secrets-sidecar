@@ -1,11 +1,11 @@
 # secrets-sidecar
-Converts secrets in ECS from environment variables to Docker Compose files under `/run/secrets`.
+Converts secrets in ECS from environment variables to Docker Compose files under `/run/secrets`. See https://docs.docker.com/compose/use-secrets/ .
 
 1. Iterates over all environment variables, checking for prefix `secret_`
 2. Creates a file under `/run/secrets` with the name of the environment variable without the prefix
 3. Returns non-zero exit code if any of the files fail to be created
 
-You'd want to add this sidecar to your ECS task definition as a non-essential container and add a volume for `/run/secrets`. Then, add `volumeFrom` to your main container.
+You'd want to add this sidecar to your ECS task definition as a non-essential container and add a volume for `/run/secrets`. Then, add `volumeFrom` to your main container. See https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bind-mounts.html#bind-mount-examples, section "To mount volumes from another container using volumesFrom".
 
 
 Test from command line:
